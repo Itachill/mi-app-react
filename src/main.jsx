@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import './global.css';
-import { CarritoProvider } from './context/CarritoContext'; // <- importante
+import { CarritoProvider } from './context/CarritoContext';
 import { AuthProvider } from './context/AuthContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

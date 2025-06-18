@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { CarritoContext } from './context/CarritoContext';
 import { AuthContext } from './context/AuthContext';
-import './Pago.css'; // crea este archivo si quieres estilos personalizados
+import './Pago.css';
 
 function Pago() {
   const { usuario } = useContext(AuthContext);
@@ -26,12 +26,7 @@ function Pago() {
     e.preventDefault();
 
     // Aquí podrías enviar los datos a una base de datos o backend
-    console.log('Pedido enviado:', {
-      nombre,
-      direccion,
-      correo,
-      carrito,
-    });
+    // En producción se enviaría la información del pedido al servidor
 
     setPedidoEnviado(true);
     vaciarCarrito();

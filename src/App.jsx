@@ -2,7 +2,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Home from './Home';
 import Carrito from './Carrito';
-import Login from './Login'; // ✅ Importar Login
+import Login from './Login';
 import Pago from './Pago';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/carrito" element={<Carrito />} />
-        <Route path="/login" element={<Login />} /> {/* ✅ Ruta funcional */}
+        <Route path="/login" element={<Login />} />
         <Route path="/pago" element={<Pago />} />
       </Routes>
     </div>

@@ -29,7 +29,6 @@ export function CarritoProvider({ children }) {
     setCarrito([]);
   };
 
-  // ✅ NUEVA FUNCIÓN para sumar/restar cantidad
   const cambiarCantidad = (nombre, delta) => {
     setCarrito((prev) =>
       prev
@@ -40,7 +39,7 @@ export function CarritoProvider({ children }) {
           }
           return item;
         })
-        .filter(Boolean) // elimina productos con cantidad 0
+        .filter(Boolean)
     );
   };
 
@@ -51,7 +50,7 @@ export function CarritoProvider({ children }) {
         agregarProducto,
         eliminarProducto,
         vaciarCarrito,
-        cambiarCantidad, // ✅ la agregamos aquí
+        cambiarCantidad,
       }}
     >
       {children}

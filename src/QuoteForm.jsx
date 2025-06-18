@@ -57,7 +57,7 @@ function QuoteForm() {
     }
   };
 
-  // 👉 Formatea y limita el RUT (ej: 19342283-K)
+  // Formatea y limita el RUT (ej: 19342283-K)
   const handleRutChange = (e) => {
     let input = e.target.value
       .replace(/[^0-9kK]/g, '') // solo números y letra k/K
