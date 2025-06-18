@@ -1,0 +1,128 @@
+import { useState } from 'react';
+import './QuoteForm.css';
+
+function QuoteForm() {
+  const [tipo, setTipo] = useState('natural');
+  const [nombre, setNombre] = useState('');
+  const [rut, setRut] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [dimensiones, setDimensiones] = useState('');
+  const [cotizaciones, setCotizaciones] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const nuevaCotizacion = {
+      tipo,
+      nombre,
+      rut,
+      correo,
+      dimensiones,
+    };
+
+    setCotizaciones([...cotizaciones, nuevaCotizacion]);
+
+    // Limpiar campos
+    setNombre('');
+    setRut('');
+    setCorreo('');
+    setDimensiones('');
+  };
+
+  // 👉 Formatea y limita el RUT (ej: 19342283-K)
+  const handleRutChange = (e) => {
+    let input = e.target.value
+      .replace(/[^0-9kK]/g, '') // solo números y letra k/K
+      .toUpperCase(); // convierte a mayúscula
+
+    // Limita a máximo 8 números + 1 DV (9 caracteres antes de formatear)
+    if (input.length > 9) {
+      input = input.slice(0, 9);
+    }
+
+    // Aplica formato con guión
+    if (input.length > 1) {
+      const cuerpo = input.slice(0, -1);
+      const dv = input.slice(-1);
+      input = `${cuerpo}-${dv}`;
+    }
+
+    setRut(input);
+  };
+
+  return (
+    <section className="formulario-cotizacion">
+      <h2>Solicitar Cotización</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Tipo de cliente:</label>
+        <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
+          <option value="natural">Persona Natural</option>
+          <option value="empresa">Empresa</option>
+        </select>
+
+        <label>Nombre:</label>
+        <input
+          type="text"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          required
+        />
+
+        <label>RUT:</label>
+        <input
+          type="text"
+          value={rut}
+          onChange={handleRutChange}
+          required
+        />
+
+        <label>Correo electrónico:</label>
+        <input
+          type="email"
+          value={correo}
+          onChange={(e) => setCorreo(e.target.value)}
+          required
+        />
+
+        <label>Dimensiones del producto (opcional):</label>
+        <input
+          type="text"
+          value={dimensiones}
+          onChange={(e) => setDimensiones(e.target.value)}
+        />
+
+        <button type="submit">Enviar Cotización</button>
+      </form>
+
+      {cotizaciones.length > 0 && (
+        <div className="tabla-cotizaciones">
+          <h3>Cotizaciones Recibidas</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Nombre</th>
+                <th>RUT</th>
+                <th>Correo</th>
+                <th>Dimensiones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cotizaciones.map((c, index) => (
+                <tr key={index}>
+                  <td>{c.tipo}</td>
+                  <td>{c.nombre}</td>
+                  <td>{c.rut}</td>
+                  <td>{c.correo}</td>
+                  <td>{c.dimensiones}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </section>
+  );
+}
+
+export default QuoteForm;
