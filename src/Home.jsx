@@ -1,4 +1,5 @@
 import './App.css';
+import './Home.css';
 import QuoteForm from './QuoteForm';
 import { useContext, useState } from 'react';
 import { CarritoContext } from './context/CarritoContext';
@@ -27,11 +28,11 @@ function Home() {
 
   return (
     <>
-      <section className="hero">
+      <section className="hero home-hero">
         <div className="hero-text">
           <h1>Encuentra la caja perfecta</h1>
           <p>Diseñadas para adaptarse a tus necesidades. Rápido, seguro y personalizado.</p>
-          <button>Ver Productos</button>
+          <a href="#productos" className="btn-ver">Ver Productos</a>
         </div>
         <div className="hero-image">
           <img
@@ -41,7 +42,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="productos">
+      <section className="productos" id="productos">
         <h2>Nuestros Productos</h2>
         <div className="producto-lista">
           {productos.map((prod) => (

@@ -1,0 +1,123 @@
+/* Styles specific to the Home page */
+
+.home-hero {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem 2rem;
+  background: var(--light-bg);
+}
+
+@media (min-width: 900px) {
+  .home-hero {
+    background-image: url('https://images.unsplash.com/photo-1602524202210-7e2e7f8e1d1b');
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+.hero-text {
+  flex: 1 1 300px;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.btn-ver {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.btn-ver:hover {
+  background: #333;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.productos {
+  padding: 3rem 2rem;
+  background: #fff;
+  text-align: center;
+}
+
+.productos h2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.producto-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.producto-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.producto-card img {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.producto-card h3 {
+  margin: 0.5rem 0;
+}
+
+.producto-card p {
+  margin: 0.5rem 0 1rem;
+}
+
+.producto-card input {
+  width: 70px;
+  padding: 0.3rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.producto-card button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.producto-card button:hover {
+  background: #333;
+}
