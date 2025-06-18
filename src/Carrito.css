@@ -1,17 +1,18 @@
 .carrito-container h2 {
   text-align: center;
   margin-bottom: 2rem;
+  font-size: 2rem;
   font-weight: 600;
 }
 
 .carrito-lista {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
 }
 
 .carrito-card {
-  background: var(--light-bg);
+  background: #fff;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 1rem;
