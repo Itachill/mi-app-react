@@ -1,9 +1,11 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
+import { CarritoContext } from './context/CarritoContext';
 import './QuoteForm.css';
 
 function QuoteForm() {
   const { usuario } = useContext(AuthContext);
+  const { carrito } = useContext(CarritoContext);
   const [tipo, setTipo] = useState('natural');
   const [nombre, setNombre] = useState('');
   const [rut, setRut] = useState('');
@@ -11,8 +13,18 @@ function QuoteForm() {
   const [dimensiones, setDimensiones] = useState('');
   const [cotizaciones, setCotizaciones] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!usuario) {
+      alert('Debes iniciar sesión para enviar la cotización');
+      return;
+    }
+
+    if (carrito.length === 0) {
+      alert('Tu carrito está vacío');
+      return;
+    }
 
     const nuevaCotizacion = {
       tipo,
@@ -20,15 +32,29 @@ function QuoteForm() {
       rut,
       correo,
       dimensiones,
+      carrito,
     };
 
-    setCotizaciones([...cotizaciones, nuevaCotizacion]);
+    try {
+      const resp = await fetch('http://localhost:3001/api/cotizacion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(nuevaCotizacion),
+      });
 
-    // Limpiar campos
-    setNombre('');
-    setRut('');
-    setCorreo('');
-    setDimensiones('');
+      if (resp.ok) {
+        alert('Cotización enviada');
+        setCotizaciones([...cotizaciones, nuevaCotizacion]);
+        setNombre('');
+        setRut('');
+        setCorreo(usuario || '');
+        setDimensiones('');
+      } else {
+        alert('Error al enviar la cotización');
+      }
+    } catch {
+      alert('No se pudo conectar con el servidor');
+    }
   };
 
   // 👉 Formatea y limita el RUT (ej: 19342283-K)
