@@ -14,7 +14,7 @@ function Carrito() {
   const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
 
   return (
-    <section className="carrito-container">
+    <section className="main-container carrito-container">
       <h2>Carrito de Compras</h2>
 
       {carrito.length === 0 ? (

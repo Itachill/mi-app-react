@@ -18,7 +18,7 @@ function Login() {
 
   if (usuario) {
     return (
-      <section className="login-container">
+      <section className="main-container login-container">
         <h2>Bienvenido</h2>
         <p>Has iniciado sesión correctamente como <strong>{usuario}</strong>.</p>
       </section>
@@ -26,7 +26,7 @@ function Login() {
   }
 
   return (
-    <section className="login-container">
+    <section className="main-container login-container">
       <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
         <label>Correo electrónico:</label>

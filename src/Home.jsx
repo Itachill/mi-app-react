@@ -42,7 +42,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="productos" id="productos">
+      <section className="productos main-container" id="productos">
         <h2>Nuestros Productos</h2>
         <div className="producto-lista">
           {productos.map((prod) => (
