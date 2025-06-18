@@ -1,13 +1,24 @@
 import { useContext, useState } from 'react';
 import { CarritoContext } from './context/CarritoContext';
+import { AuthContext } from './context/AuthContext';
 import './Pago.css'; // crea este archivo si quieres estilos personalizados
 
 function Pago() {
+  const { usuario } = useContext(AuthContext);
   const { carrito, vaciarCarrito } = useContext(CarritoContext);
   const [nombre, setNombre] = useState('');
   const [direccion, setDireccion] = useState('');
-  const [correo, setCorreo] = useState('');
+  const [correo, setCorreo] = useState(usuario || '');
   const [pedidoEnviado, setPedidoEnviado] = useState(false);
+
+  if (!usuario) {
+    return (
+      <section style={{ padding: '2rem' }}>
+        <h2>Proceso de Pago</h2>
+        <p>Debes iniciar sesión para completar el pago.</p>
+      </section>
+    );
+  }
 
   const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
 
@@ -47,7 +58,13 @@ function Pago() {
         <input type="text" value={direccion} onChange={(e) => setDireccion(e.target.value)} required />
 
         <label>Correo electrónico:</label>
-        <input type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
+        <input
+          type="email"
+          value={correo}
+          onChange={(e) => setCorreo(e.target.value)}
+          required
+          readOnly={!!usuario}
+        />
 
         <button type="submit">Confirmar Pedido</button>
       </form>
