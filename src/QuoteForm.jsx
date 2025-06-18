@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
 import './QuoteForm.css';
 
 function QuoteForm() {
+  const { usuario } = useContext(AuthContext);
   const [tipo, setTipo] = useState('natural');
   const [nombre, setNombre] = useState('');
   const [rut, setRut] = useState('');
-  const [correo, setCorreo] = useState('');
+  const [correo, setCorreo] = useState(usuario || '');
   const [dimensiones, setDimensiones] = useState('');
   const [cotizaciones, setCotizaciones] = useState([]);
 
@@ -50,6 +52,15 @@ function QuoteForm() {
     setRut(input);
   };
 
+  if (!usuario) {
+    return (
+      <section className="formulario-cotizacion">
+        <h2>Solicitar Cotización</h2>
+        <p>Debes iniciar sesión para enviar una cotización.</p>
+      </section>
+    );
+  }
+
   return (
     <section className="formulario-cotizacion">
       <h2>Solicitar Cotización</h2>
@@ -82,6 +93,7 @@ function QuoteForm() {
           value={correo}
           onChange={(e) => setCorreo(e.target.value)}
           required
+          readOnly={!!usuario}
         />
 
         <label>Dimensiones del producto (opcional):</label>

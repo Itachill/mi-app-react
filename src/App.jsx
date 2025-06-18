@@ -3,6 +3,7 @@ import './App.css';
 import Home from './Home';
 import Carrito from './Carrito';
 import Login from './Login'; // ✅ Importar Login
+import Pago from './Pago';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/login" element={<Login />} /> {/* ✅ Ruta funcional */}
+        <Route path="/pago" element={<Pago />} />
       </Routes>
     </div>
   );
