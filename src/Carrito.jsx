@@ -18,42 +18,43 @@ function Carrito() {
       <h2>Carrito de Compras</h2>
 
       {carrito.length === 0 ? (
-        <p>Tu carrito está vacío.</p>
+        <div className="carrito-vacio">
+          <img
+            src="https://i.imgur.com/MT5QUBx.png"
+            alt="Carrito vacío"
+          />
+          <p>Tu carrito está vacío.</p>
+        </div>
       ) : (
         <>
-          <table className="tabla-carrito">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Total</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {carrito.map((item) => (
-                <tr key={item.nombre}>
-                  <td>{item.nombre}</td>
-                  <td>${item.precio}</td>
-                  <td>
-                    <button onClick={() => cambiarCantidad(item.nombre, -1)}>-</button>
-                    <span style={{ margin: '0 8px' }}>{item.cantidad}</span>
-                    <button onClick={() => cambiarCantidad(item.nombre, 1)}>+</button>
-                  </td>
-                  <td>${item.precio * item.cantidad}</td>
-                  <td>
-                    <button onClick={() => eliminarProducto(item.nombre)}>Eliminar</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="carrito-lista">
+            {carrito.map((item) => (
+              <div className="carrito-card" key={item.nombre}>
+                <img
+                  src="https://via.placeholder.com/150?text=Caja"
+                  alt={item.nombre}
+                />
+                <h3>{item.nombre}</h3>
+                <p>${item.precio}</p>
+                <div className="cantidad-controls">
+                  <button onClick={() => cambiarCantidad(item.nombre, -1)}>-</button>
+                  <span>{item.cantidad}</span>
+                  <button onClick={() => cambiarCantidad(item.nombre, 1)}>+</button>
+                </div>
+                <p>Total: ${item.precio * item.cantidad}</p>
+                <button onClick={() => eliminarProducto(item.nombre)}>
+                  Eliminar
+                </button>
+              </div>
+            ))}
+          </div>
 
           <div className="carrito-total">
-            <p><strong>Total:</strong> ${total}</p>
+            <p>
+              <strong>Total:</strong> ${total}
+            </p>
 
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+            <div className="acciones">
               <button onClick={vaciarCarrito}>Vaciar Carrito</button>
 
               <Link to="/">
@@ -61,9 +62,7 @@ function Carrito() {
               </Link>
 
               <Link to="/pago">
-                <button style={{ backgroundColor: '#28a745', color: 'white' }}>
-                  Ir a Pagar
-                </button>
+                <button>Ir a Pagar</button>
               </Link>
             </div>
           </div>

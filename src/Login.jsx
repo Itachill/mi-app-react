@@ -1,25 +1,26 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
 import './Login.css';
 
 function Login() {
+  const { usuario, login } = useContext(AuthContext);
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
-  const [logueado, setLogueado] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Aquí podrías validar credenciales contra un backend más adelante
     if (correo && clave) {
-      setLogueado(true);
+      login(correo);
     }
   };
 
-  if (logueado) {
+  if (usuario) {
     return (
       <section className="login-container">
         <h2>Bienvenido</h2>
-        <p>Has iniciado sesión correctamente como <strong>{correo}</strong>.</p>
+        <p>Has iniciado sesión correctamente como <strong>{usuario}</strong>.</p>
       </section>
     );
   }
