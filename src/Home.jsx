@@ -2,6 +2,7 @@ import './App.css';
 import QuoteForm from './QuoteForm';
 import { useContext, useState } from 'react';
 import { CarritoContext } from './context/CarritoContext';
+import './Home.css';
 
 function Home() {
   const { agregarProducto } = useContext(CarritoContext);
